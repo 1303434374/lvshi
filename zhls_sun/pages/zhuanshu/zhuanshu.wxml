@@ -1,30 +1,54 @@
 <view>
     <view class="lvshi-item">
         <view class="item-title">
-            <view class="lvshi-name">{{lawyerdetails.lawyers}}</view>
-            <view class="lvshi-years">执业：{{lawyerdetails.life}}年</view>
+            <view class="lvshi-name">{{detail.name}}</view>
+            <view class="lvshi-years">{{detail.address}}</view>
         </view>
         <view class="lvshi-mes">
-            <image class="lvshiImg" src="{{url}}{{lawyerdetails.logo}}"></image>
+            <image class="lvshiImg" src="{{url}}{{detail.headimg}}"></image>
             <view class="lvshi-level">
-                <view>律师等级：{{lawyerdetails.lawyer_ji}}</view>
-                <view>专业领域：<text style="color:#f58144">{{lawyerdetails.cate}}</text>
-                </view>
-                <view class="last_row">
+                <view>执业律所：{{detail.company}}</view>
+                <view>手机号码：<text style="color:#f58144" catchtap="tap_tel" data-tel="{{detail.phone}}">{{detail.phone}}（点击拨打）</text></view>
+                <view>律师位置：{{detail.detailaddress}}</view>
+                <!--<view class="last_row">
                     <view class="starRow">评价星级：
                           <image class="starImgs" src="../../resource/images/first/xingxing.png" wx:for="{{lawyerdetails.star}}"></image>
                         <image class="starImgs" src="../../resource/images/first/xingxing-kong.png" wx:for="{{lawyerdetails.kong}}"></image>
                     </view>
                     <view>2018人已评</view>
-                </view>
+                </view>-->
             </view>
         </view>
     </view>
-    <view class="intro_box">
+    <!--<view class="intro_box">
         <view class="intro_title">律师简介</view>
         <view class="intro_contents">
             <rich-text nodes="{{lawyerdetails.lawyer_details}}"></rich-text>
         </view>
     </view>
-    <view bindtap="gozixun" class="zixun-btn" data-id="{{lawyerdetails.id}}">向他咨询</view>
+    <view bindtap="gozixun" class="zixun-btn" data-id="{{lawyerdetails.id}}">向他咨询</view>-->
+    <view class="btn-container">
+        <view class="btn" catchtap="tap_code" data-url="{{url}}{{detail.qrcode}}">
+            <image src="/zhls_sun/resource/images/icon/code.png" />
+            小程序码
+        </view>
+        <button class="btn" style="background-color: #1afa29;" open-type="share" hover-class="none">
+            <image src="/zhls_sun/resource/images/icon/share.png" />
+            点我分享
+        </button>
+    </view>
+    <view class="nav-container">
+        <view class="nav {{nav == 0 ? 'active' : ''}}" style="border-right: 1px solid #1296db;" catchtap="tap_nav" data-id="0">
+            律师简介
+        </view> 
+        <view class="nav {{nav == 1 ? 'active' : ''}}" catchtap="tap_nav" data-id="1">
+            律师优势
+        </view>       
+    </view>
+    <view class="content" wx:if="{{nav == 0}}">
+         <rich-text nodes="{{content1}}"></rich-text>
+    </view>
+    <view class="content" wx:else>
+         <rich-text nodes="{{content2}}"></rich-text>
+    </view>
 </view>

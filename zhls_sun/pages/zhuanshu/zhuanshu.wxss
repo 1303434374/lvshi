@@ -97,3 +97,82 @@ rich-text {
     font-size: 30rpx;
     color: #000;
 }
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    height: 80rpx;
+    padding: 20rpx 10rpx;
+}
+
+.btn-container .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    margin: 0 20rpx;
+    background-color: #f00;
+    color: #fff;
+    font-size: 25rpx;
+    border-radius: 20rpx;
+}
+
+.btn-container .btn image {
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 10rpx;
+}
+
+.nav-container {
+    display: flex;
+    margin: 0 30rpx 20rpx;
+    height: 80rpx;
+    border: 1px solid #1296db;
+}
+
+.nav-container .nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 30rpx;
+    background-color: #fff;
+}
+
+.nav-container .active {
+    color: #1296db;
+    font-weight: bold;
+}
+
+.content {
+    padding: 10rpx 30rpx;
+    background-color: #fff;
+}
+
+button {
+    display: inline;
+    margin-left:0;
+    margin-right:0;
+    padding-left:0;
+    padding-right:0;
+    box-sizing:border-box;
+    font-size:18px;
+    text-align:center;
+    text-decoration:none;
+    line-height:0;
+    border-radius:0;
+    -webkit-tap-highlight-color:transparent;
+    overflow:hidden;
+    color:#000000;
+    background-color:transparent;
+}
+
+button::after {
+    border: none;
+}
+
+rich-text {
+    font-size:28rpx;
+    line-height:40rpx;
+}

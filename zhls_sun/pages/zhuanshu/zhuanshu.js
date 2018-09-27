@@ -4,12 +4,29 @@ Page({
     data: {
         num: 0,
         light: "",
-        kong: ""
+        kong: "",
+        detail: [],
+        nav: 0
     },
     onLoad: function(t) {
-        // var a = t.id;
-        // wx.setStorageSync("id", a), this.url();
+        wx.setStorageSync("id", 0), this.url();
+        var a = this
+        app.util.request({
+            url: "entry/wxapp/Getzhuanshu",
+            cachetime: "0",
+            success: function(t) {
+                console.log(t.data), a.setData({
+                    detail: t.data.result,
+                    content1: a.escape2Html(t.data.result.desc),
+                    content2: a.escape2Html(t.data.result.linyu)
+                });
+            }
+        });
     },
+    escape2Html: function (str) {
+    var arrEntities = { 'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"' };
+    return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) { return arrEntities[t]; });
+  },
     url: function(t) {
         var a = this;
         app.util.request({
@@ -34,24 +51,29 @@ Page({
         });
     },
     onReady: function() {},
-    onShow: function() {
-        var a = this, t = wx.getStorageSync("id");
-        app.util.request({
-            url: "entry/wxapp/Nowlawyer",
-            cachetime: "0",
-            data: {
-                id: t
-            },
-            success: function(t) {
-                console.log(t.data), a.setData({
-                    lawyerdetails: t.data
-                });
-            }
-        });
-    },
+    onShow: function() {},
     onHide: function() {},
     onUnload: function() {},
     onPullDownRefresh: function() {},
     onReachBottom: function() {},
-    onShareAppMessage: function() {}
+    onShareAppMessage: function() {},
+
+    tap_tel: function (event) {
+        wx.makePhoneCall({
+            phoneNumber: event.currentTarget.dataset.tel
+        })
+    },
+
+    tap_code: function (event) {
+        wx.previewImage({
+            urls: [event.currentTarget.dataset.url]
+        })
+    },
+
+    tap_nav: function (event) {
+      let id = event.currentTarget.dataset.id
+        this.setData({
+            nav: id
+        })
+   }
 });
