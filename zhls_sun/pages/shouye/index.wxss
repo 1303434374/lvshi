@@ -269,17 +269,18 @@ swiper-item image {
     font-size: 26rpx;
     position: relative;
     margin-bottom: 40rpx;
+    height: 150rpx;
 }
 
 .lvshiImg {
-    width: 120rpx;
-    height: 120rpx;
+    width: 140rpx;
+    height: 140rpx;
     display: flex;
     border-radius: 100%;
 }
 
 .lvshi-level {
-    height: 120rpx;
+    height: 140rpx;
     margin-left: 20rpx;
     color: #666;
     font-size: 26rpx;
