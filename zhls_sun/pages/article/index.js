@@ -14,7 +14,7 @@ Page({
         }), 0 == e.data.current && wx.redirectTo({
             url: "../shouye/index?currentIndex=0"
         }), 2 == e.data.current && wx.redirectTo({
-            url: "/zhls_sun/pages/lvshiList/lvshiList?currentIndex=2"
+            url: "/zhls_sun/pages/downloadList/downloadList?currentIndex=2"
         }), 3 == e.data.current && wx.redirectTo({
             url: "../mine/index?currentIndex=3"
         });

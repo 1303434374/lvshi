@@ -12,7 +12,7 @@ Page({
         }), 1 == t.data.current && wx.redirectTo({
             url: "../article/index?currentIndex=1"
         }), 2 == t.data.current && wx.redirectTo({
-            url: "/zhls_sun/pages/lvshiList/lvshiList?currentIndex=2"
+            url: "/zhls_sun/pages/downloadList/downloadList?currentIndex=2"
         }), 0 == t.data.current && wx.redirectTo({
             url: "../shouye/index?currentIndex=0"
         });
@@ -65,6 +65,11 @@ Page({
         });
     },
     onShow: function() {},
+    fjstory:function(){
+      wx.navigateTo({
+        url: "../mine/fjstory"
+      });
+    },
     goYuyue: function(n) {
         wx.navigateTo({
             url: "../mine/yuyue"

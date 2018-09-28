@@ -34,6 +34,13 @@
             </view>
             <image class="arrow" src="../../resource/images/first/jiantou.png"></image>
         </view>
+         <view bindtap="fjstory" class="myItem">
+            <view class="leftMes">
+                <image class="leftIcon" src="../../resource/images/mine/fj.png"></image>
+                <view class="leftWord">我的附件</view>
+            </view>
+            <image class="arrow" src="../../resource/images/first/jiantou.png"></image>
+        </view>
     </view>
     <view style="height:90rpx;">
         <view class="footer-box">

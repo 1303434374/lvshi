@@ -6,6 +6,7 @@
         "zhls_sun/pages/daihuifu/index/index",
         "zhls_sun/pages/daihuifu/details/details",
         "zhls_sun/pages/lvshiList/lvshiList",
+        "zhls_sun/pages/downloadList/downloadList",
         "zhls_sun/pages/yewuDetails/yewuDetails",
         "zhls_sun/pages/mineConsult/details",
         "zhls_sun/pages/mineConsult/payDetails",
@@ -27,7 +28,8 @@
         "zhls_sun/pages/index/index",
         "zhls_sun/pages/withDrawal/withDrawal",
         "zhls_sun/pages/logs/logs",
-        "zhls_sun/pages/zhuanshu/zhuanshu"
+        "zhls_sun/pages/zhuanshu/zhuanshu",
+        "zhls_sun/pages/mine/fjstory"
     ],
     "window": {
         "backgroundTextStyle": "light",
