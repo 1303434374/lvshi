@@ -65,6 +65,11 @@ Page({
         });
     },
     onShow: function() {},
+    fjstory:function(){
+      wx.navigateTo({
+        url: "../mine/fjstory"
+      });
+    },
     goYuyue: function(n) {
         wx.navigateTo({
             url: "../mine/yuyue"

@@ -1,0 +1,28 @@
+<view class="container">
+    <view class="yuyelist">
+        <view class="yuyueItem" wx:for="{{mentData}}">
+            <view class="time" bindtap='openfj' data-path="{{item.saveurl}}">
+               <view class="timeRow">
+                    <view class="blueDot"></view>
+                    <view class="word">附件名称：{{item.fname}}</view>
+                </view>
+                <view class="timeRow">
+                    <view class="blueDot"></view>
+                    <view class="word">下载日期：{{item.addtime}}</view>
+                </view>
+                <view class="timeRow">
+                    <view class="orangeDot"></view>
+                    <view class="word">价格：￥{{item.fmoney}}元</view>
+                </view>
+            </view>
+            <view class="contents">
+                如需下载打印请复制下载地址到浏览器下载即可
+            </view>
+             <view class="title">
+                
+                <view class="status" data-downurl="{{item.downurl}}" catchtap='copeurl'>复制下载地址</view>
+            </view>
+            <view catchtap="openfj" class="cancle-Btn" data-path="{{item.saveurl}}">打开</view>
+        </view>
+    </view>
+</view>
