@@ -10,7 +10,8 @@ Page({
         is_modal_Hidden: !0,
         autoplay: !0,
         interval: 5e3,
-        duration: 1e3
+        duration: 1e3,
+        qrcode: ''
     },
     onLoad: function(t) {
         var a = this;
@@ -47,6 +48,15 @@ Page({
                         a.onShow();
                     }
                 });
+            }
+        });
+        app.util.request({
+            url: "entry/wxapp/Getoneqrcode",
+            cachetime: "0",
+            success: (t) => {
+                this.setData({
+                    qrcode: t.data.result.qrcode
+                })
             }
         });
     },
@@ -359,5 +369,10 @@ Page({
     updateUserInfo: function(t) {
         console.log("授权操作更新");
         this.wxauthSetting();
+    },
+    tap_share: function (event) {
+        wx.previewImage({
+            urls: [this.data.qrcode]
+        })
     }
 });

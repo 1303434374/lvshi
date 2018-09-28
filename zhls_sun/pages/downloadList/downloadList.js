@@ -8,8 +8,7 @@ Page({
         light: "",
         kong: "",
         array: [ "美国", "中国", "巴西", "日本" ],
-        fujian: [],
-        savapaths:''
+        fujian: []
     },
     bindPickerChange: function(e) {
         var a = this;
@@ -98,26 +97,61 @@ Page({
     },
     getfujian: function (id) {
         var e = this
-        app.util.request({
-            url: "entry/wxapp/getfujian",
-            cachetime: "0",
-            data: {
-                id: id
-            },
-            success: function(t) {
-                let list = t.data.result
-                list.forEach((value, index, array) => {
-                    var upFileName = value.downurl
-                    var index1=upFileName.lastIndexOf(".");
-                    var index2=upFileName.length;
-                    var suffix=upFileName.substring(index1+1,index2);
-                    value.format = suffix.toUpperCase()
-                })
-                console.log(t.data), e.setData({
-                    fujian: list
+        wx.getStorage({
+            key: "openid",
+            success: function (t) {
+                console.log('openid='+t.data)
+                app.util.request({
+                    url: "entry/wxapp/Getfjid",
+                    cachetime: "0",
+                    data: {
+                        openid: t.data
+                    },
+                    success: function (t) {
+                        console.log(t.data)
+                        let mine = t.data.result
+                        app.util.request({
+                            url: "entry/wxapp/getfujian",
+                            cachetime: "0",
+                            data: {
+                                id: id
+                            },
+                            success: function(t) {
+                                let list = t.data.result
+                                list.forEach((value, index, array) => {
+                                    var upFileName = value.downurl
+                                    var index1=upFileName.lastIndexOf(".");
+                                    var index2=upFileName.length;
+                                    var suffix=upFileName.substring(index1+1,index2);
+                                    value.format = suffix.toUpperCase()
+                                    if (mine.length == 0) {
+                                        value.state = 0
+                                    } else {
+                                        if (e.contains(mine,value.fid)) {
+                                            value.state = 1
+                                        } else {
+                                            value.state = -1
+                                        }
+                                    }
+                                })
+                                console.log(t.data), e.setData({
+                                    fujian: list
+                                });
+                            }
+                        });
+                    }
                 });
             }
         });
+    },
+    contains: function(arr, obj) {
+        var i = arr.length;
+        while (i--) {
+            if (arr[i] === obj) {
+            return true;
+            }
+        }
+        return false;
     },
     url: function(t) {
         var e = this;
@@ -160,9 +194,103 @@ Page({
         });
     },
     goDownload: function (event) {
+        let that = this
         let id = event.currentTarget.dataset.id
         let url = event.currentTarget.dataset.url  
-        this.downs(id,url)
+        let state = event.currentTarget.dataset.state  
+        switch (state) {
+            case 0:
+                //免费下载
+                wx.showModal({
+                    tilte: '提示',
+                    content: '您仅有一次免费下载的机会，是否确定下载此附件？',
+                    showCancel: true,
+                    success: (res) => {
+                        if (res.confirm) {
+                            this.downs(id,url)
+                        } 
+                    }
+                })
+                break
+            case -1:
+                //付费下载
+                wx.showModal({
+                    tilte: '提示',
+                    content: '您是否确定支付所需费用下载此附件？',
+                    showCancel: true,
+                    success: (res) => {
+                        if (res.confirm) {
+                            let price = event.currentTarget.dataset.price
+                            app.util.request({
+                                url: "entry/wxapp/Orderarr",
+                                cachetime: "30",
+                                data: {
+                                    openid: wx.getStorageSync('openid'),
+                                    price: price
+                                },
+                                success: function(e) {
+                                     wx.requestPayment({
+                                        timeStamp: e.data.timeStamp,
+                                        nonceStr: e.data.nonceStr,
+                                        package: e.data.package,
+                                        signType: "MD5",
+                                        paySign: e.data.paySign,
+                                        success: function(e) {
+                                            // wx.getStorage({
+                                            //     key: "openid",
+                                            //     success: function(e) {
+                                                    app.util.request({
+                                                        url: "entry/wxapp/addmoney",
+                                                        cachetime: "0",
+                                                        data: {
+                                                            price: price
+                                                        },
+                                                        success: function(e) {
+                                                            console.log(e.data);
+                                                            that.downs(id,url)
+                                                            // var a = e.data.fid;
+                                                            // console.log(a), app.util.request({
+                                                            //     url: "entry/wxapp/Paysuccess",
+                                                            //     cachetime: "0",
+                                                            //     data: {
+                                                            //         openid: t,
+                                                            //         fid: a,
+                                                            //         prepay_id: n
+                                                            //     },
+                                                            //     success: function(e) {
+                                                            //         console.log(e.data), wx.navigateBack({});
+                                                            //     }
+                                                            // });
+                                                        }
+                                                    });
+                                            //     }
+                                            // });
+                                        },
+                                        fail: function(e) {}
+                                    });
+                                }
+                            });
+                        } 
+                    }
+                })
+                break
+            case 1:
+                //直接打开
+                app.util.request({
+                    url: "entry/wxapp/Getfjdetail",
+                    data: {
+                        fjid: id,
+                        openid: wx.getStorageSync('openid')
+                    },
+                    success: (t) => {
+                        console.log(t)
+                        this.showit(t.data.result.saveurl)
+                    }
+                });
+                break
+            default:
+                break
+        }
     }, 
   downs:function(id,url){
     let that=this;
@@ -176,18 +304,39 @@ Page({
                     tempFilePath: res.tempFilePath,
                     success: (res) => {
                         console.log('本地地址='+res.savedFilePath);
+                        let path = res.savedFilePath
                          app.util.request({
                             url: "entry/wxapp/Postfujian",
                             data: {
                                 fjid: id,
                                 openid: wx.getStorageSync('openid'),
-                                saveurl: res.savedFilePath
+                                saveurl: path
                             },
                             success: function(t) {
                                 console.log(t)
-                                wx.showToast({
-                                    title: '保存成功，可在我的附件中查看',
-                                    icon: 'none'
+                                let list = that.data.fujian
+                                list.forEach((value, index, array) => {
+                                    if (value.fid == id) {
+                                        value.state = 1
+                                    } else {
+                                        if (value.state != 1) {
+                                            value.state = -1
+                                        }
+                                    }
+                                })
+                                that.setData({
+                                    fujian: list 
+                                })
+                                wx.showModal({
+                                    tilte: '提示',
+                                    content: '下载成功，可在我的附件中查看',
+                                    showCancel: true,
+                                    confirmText: '直接打开',
+                                    success: (res) => {
+                                        if (res.confirm) {
+                                            that.showit(path)
+                                        } 
+                                    }
                                 })
                             }
                         });

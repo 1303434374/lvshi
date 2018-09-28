@@ -594,3 +594,15 @@ swiper-item image {
     color: #fff;
     font-size: 26rpx;
 }
+
+.share-btn {
+    width:690rpx;
+    height:80rpx;
+    border-radius:50rpx;
+    background-color:#618dfb;
+    margin-bottom: 20rpx;
+	color: #fff;
+	font-size: 30rpx;
+	line-height: 80rpx;
+    text-align: center;
+}

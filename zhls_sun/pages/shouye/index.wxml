@@ -53,6 +53,9 @@
         <view class="moreVisitors">...</view>
         <view class="peopleNum">{{shopData.service_num}}人次</view>
     </view>
+    <view class="share-btn" catchtap="tap_share">
+        一键分享小程序
+    </view>
     <view class="lvshi-list" style="margin-top: 0;">
         <view class="title-Row">
             <view class="left">律师列表</view>

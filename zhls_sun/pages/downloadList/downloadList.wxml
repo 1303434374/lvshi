@@ -53,7 +53,7 @@
         </view>-->
         <view class="lvshi-mes" style="margin-bottom:20rpx;">
             <!--<image class="lvshiImg" src="{{item.logo}}"></image>-->
-            <view class="lvshi-level" style="height:80rpx;">
+            <view class="lvshi-level" style="height:80rpx;max-width:500rpx;">
                 <view>文件名称：{{item.fname}}</view>
                 <view>文件类型：<text style="color:#f58144">{{item.format}}</text></view>
                 <!--<view class="starRow">评价星级：
@@ -62,7 +62,9 @@
                 </view>-->
             </view>
             <view class="rightBox">
-                <view catchtap="goDownload" class="question" style="top: 10rpx;" data-url="{{item.downurl}}" data-id="{{item.fid}}">￥{{item.fmoney}}</view>
+                <view catchtap="goDownload" class="question" style="top: 10rpx;" data-url="{{item.downurl}}" data-id="{{item.fid}}" data-state="{{item.state}}" wx:if="{{item.state == 0}}">免费</view>
+                <view catchtap="goDownload" class="question" style="top: 10rpx;" data-url="{{item.downurl}}" data-id="{{item.fid}}" data-state="{{item.state}}" wx:if="{{item.state == 1}}">打开</view>
+                <view catchtap="goDownload" class="question" style="top: 10rpx;" data-url="{{item.downurl}}" data-id="{{item.fid}}" data-state="{{item.state}}" data-price="{{item.fmoney}}" wx:if="{{item.state == -1}}">￥{{item.fmoney}}</view>
                 <!--<view class="dis">{{item.distance}}km</view>-->
             </view>
         </view>
