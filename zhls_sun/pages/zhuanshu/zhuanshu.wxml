@@ -39,10 +39,10 @@
     </view>
     <view class="nav-container">
         <view class="nav {{nav == 0 ? 'active' : ''}}" style="border-right: 1px solid #1296db;" catchtap="tap_nav" data-id="0">
-            律师简介
+            法律顾问简介
         </view> 
         <view class="nav {{nav == 1 ? 'active' : ''}}" catchtap="tap_nav" data-id="1">
-            律师优势
+            法律顾问优势
         </view>       
     </view>
     <view class="content" wx:if="{{nav == 0}}">

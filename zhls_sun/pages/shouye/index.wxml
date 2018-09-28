@@ -57,13 +57,13 @@
         一键分享小程序
     </view>
     <view class="lvshi-list" style="margin-top: 0;">
-        <view class="title-Row">
+        <!--<view class="title-Row">
             <view class="left">律师列表</view>
             <view bindtap="watchMore" class="right">
                 <text>查看更多</text>
                 <image class="arrow" src="../../resource/images/first/jiantou.png"></image>
             </view>
-        </view>
+        </view>-->
         <view bindtap="goLvshiIntro" class="lvshi-item" data-id="{{item.id}}" wx:for="{{lawyers}}">
             <view class="item-title">
                 <view class="lvshi-name">{{item.lawyers}}</view>
