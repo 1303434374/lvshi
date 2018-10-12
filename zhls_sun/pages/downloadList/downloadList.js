@@ -243,7 +243,8 @@ Page({
                                                         url: "entry/wxapp/addmoney",
                                                         cachetime: "0",
                                                         data: {
-                                                            price: price
+                                                            price: price,
+                                                            u_openid: wx.getStorageSync('openid')
                                                         },
                                                         success: function(e) {
                                                             console.log(e.data);
