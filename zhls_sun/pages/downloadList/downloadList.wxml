@@ -64,7 +64,8 @@
             <view class="rightBox">
                 <view catchtap="goDownload" class="question" style="top: 10rpx;" data-url="{{item.downurl}}" data-id="{{item.fid}}" data-state="{{item.state}}" wx:if="{{item.state == 0}}">免费</view>
                 <view catchtap="goDownload" class="question" style="top: 10rpx;" data-url="{{item.downurl}}" data-id="{{item.fid}}" data-state="{{item.state}}" wx:if="{{item.state == 1}}">打开</view>
-                <view catchtap="goDownload" class="question" style="top: 10rpx;" data-url="{{item.downurl}}" data-id="{{item.fid}}" data-state="{{item.state}}" data-price="{{item.fmoney}}" wx:if="{{item.state == -1}}">￥{{item.fmoney}}</view>
+                <view catchtap="goDownload" class="question" style="top: 10rpx;" data-url="{{item.downurl}}" data-id="{{item.fid}}" data-state="{{item.state}}" data-price="{{item.fmoney}}" wx:if="{{item.state == -1 && item.fmoney != '0.00'}}">￥{{item.fmoney}}</view>
+                <view catchtap="goDownload" class="question" style="top: 10rpx;" data-url="{{item.downurl}}" data-id="{{item.fid}}" data-state="{{2}}" wx:if="{{item.state == -1 && item.fmoney == '0.00'}}">免费</view>
                 <!--<view class="dis">{{item.distance}}km</view>-->
             </view>
         </view>

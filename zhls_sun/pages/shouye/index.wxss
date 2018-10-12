@@ -201,7 +201,7 @@ swiper-item image {
     width: 100%;
 }
 
-.buss-item {
+/*.buss-item {
     width: 270rpx;
     display: inline-block;
     white-space: pre-line;
@@ -232,7 +232,37 @@ swiper-item image {
     text-align: center;
     margin-top: 13rpx;
     margin-bottom: 20rpx;
+}*/
+
+.buss-item {
+    width:330rpx;
+    display:inline-block;
+    white-space:pre-line;
+    margin-left:30rpx;
+    color:#000;
+    font-size:30rpx;
+    margin-bottom: 30rpx;
+    border: 1px solid #ddd;
+    /*box-shadow: 0 2px #ddd;
+    border-radius: 10px;*/
 }
+
+.scrollImgs {
+    height:160rpx;
+    display:flex;
+    width:330rpx;
+}
+
+.scrollWords {
+    width:330rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    text-align:center;
+    margin-top:13rpx;
+    margin-bottom:20rpx;
+}
+
 
 .lvshi-list {
     width: 100%;

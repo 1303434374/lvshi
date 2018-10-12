@@ -200,7 +200,7 @@ Page({
         let state = event.currentTarget.dataset.state  
         switch (state) {
             case 0:
-                //免费下载
+                //首次下载
                 wx.showModal({
                     tilte: '提示',
                     content: '您仅有一次免费下载的机会，是否确定下载此附件？',
@@ -287,6 +287,19 @@ Page({
                         this.showit(t.data.result.saveurl)
                     }
                 });
+                break
+            case 2:
+                //免费下载
+                wx.showModal({
+                    tilte: '提示',
+                    content: '是否确定下载此附件？',
+                    showCancel: true,
+                    success: (res) => {
+                        if (res.confirm) {
+                            this.downs(id,url)
+                        } 
+                    }
+                })
                 break
             default:
                 break

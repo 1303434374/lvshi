@@ -93,12 +93,12 @@
         <view class="buss-title">
             <view>业务范围</view>
         </view>
-        <scroll-view class="buss-scroll" scrollX="true">
-            <view bindtap="toYewuDetails" class="buss-item" data-id="{{item.id}}" wx:for="{{business}}">
-                <image class="scrollImgs" src="{{url}}{{item.imgs}}"></image>
+        <!--<scroll-view class="buss-scroll" scrollX="true">-->
+            <view class="buss-item" wx:for="{{business}}">
+                <!--<image class="scrollImgs" src="{{url}}{{item.imgs}}"></image>-->
                 <view class="scrollWords">{{item.goods_name}}</view>
             </view>
-        </scroll-view>
+        <!--</scroll-view>-->
     </view>
     <view style="height:90rpx;">
         <view class="footer-box">
